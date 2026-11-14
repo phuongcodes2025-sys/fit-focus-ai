@@ -131,6 +131,12 @@ See [docs/architecture.md](docs/architecture.md) and [docs/api-design.md](docs/a
 
 ---
 
+## Roadmap
+
+Development is organized into 12 sprints (Sprint 0 → Sprint 11), from discovery to HackUTA submission. See [docs/SPRINTS.md](docs/SPRINTS.md) and the [milestones](https://github.com/phuongcodes2025-sys/fit-focus-ai/milestones).
+
+---
+
 ## Tech Stack
 
 ### Frontend
@@ -185,7 +191,8 @@ fit-focus-ai/
 │
 ├── docs/
 │   ├── architecture.md
-│   └── api-design.md
+│   ├── api-design.md
+│   └── SPRINTS.md
 │
 ├── database/
 │   └── schema.sql
