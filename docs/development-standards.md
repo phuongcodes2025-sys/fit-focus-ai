@@ -30,7 +30,8 @@ chore: update dependencies
 
 ## Secrets
 
-- Keep API keys, database credentials and webhooks in `.env` only.
+- Keep API keys, database credentials and webhooks in `.env` (backend) or `.env.local` (frontend) only.
+- Only variables prefixed `NEXT_PUBLIC_` reach the browser, so never put a secret in one.
 - Commit `.env.example` with placeholder values, never real ones.
 - If a secret is committed by mistake, rotate it immediately.
 
