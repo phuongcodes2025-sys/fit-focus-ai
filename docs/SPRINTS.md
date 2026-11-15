@@ -41,6 +41,8 @@ Each sprint is tracked as a GitHub [milestone](https://github.com/phuongcodes202
 
 #### 0.2 Business Analysis
 
+📄 [business-analysis.md](business-analysis.md)
+
 - Stakeholder Analysis
 - Business Requirements
 - SWOT Analysis
@@ -55,7 +57,7 @@ Each sprint is tracked as a GitHub [milestone](https://github.com/phuongcodes202
 **Deliverables**
 
 - ✅ [Project Charter](project-charter.md)
-- ✅ Business Analysis Report
+- ✅ [Business Analysis Report](business-analysis.md)
 - ✅ MVP Scope Document
 
 ### Sprint 1 - Solution Design
