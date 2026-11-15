@@ -1,12 +1,14 @@
 from fastapi import APIRouter
 
+from .study_plan import router as study_plan_router
+
 router = APIRouter()
+router.include_router(study_plan_router)
 
 
-@router.post("/study-plan")
-def study_plan():
-    # TODO: call Gemini service and store result in Tiger Data
-    return {"message": "study plan endpoint"}
+@router.get("/health")
+def health():
+    return {"status": "ok", "app": "Fit & Focus AI"}
 
 
 @router.post("/meal-plan")

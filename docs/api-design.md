@@ -40,6 +40,8 @@ Response `200 OK`:
 
 ## POST /api/v1/study-plan
 
+> **Current implementation (Sprint 4, mock):** the endpoint accepts `{"course", "assignment", "deadline"}` and always returns `{"risk": "High", "priority": "High", "pomodoros": 6}`. The full request and response below is the target design for Sprint 5.
+
 Request:
 
 ```json
