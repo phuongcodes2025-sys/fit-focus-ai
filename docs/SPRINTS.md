@@ -50,6 +50,8 @@ Each sprint is tracked as a GitHub [milestone](https://github.com/phuongcodes202
 
 #### 0.3 MVP Scope Definition
 
+📄 [mvp-scope.md](mvp-scope.md)
+
 - In Scope
 - Out of Scope
 - HackUTA Strategy
@@ -58,7 +60,7 @@ Each sprint is tracked as a GitHub [milestone](https://github.com/phuongcodes202
 
 - ✅ [Project Charter](project-charter.md)
 - ✅ [Business Analysis Report](business-analysis.md)
-- ✅ MVP Scope Document
+- ✅ [MVP Scope Document](mvp-scope.md)
 
 ### Sprint 1 - Solution Design
 

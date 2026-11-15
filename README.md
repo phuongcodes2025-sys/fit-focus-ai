@@ -193,6 +193,7 @@ fit-focus-ai/
 │   ├── architecture.md
 │   ├── api-design.md
 │   ├── business-analysis.md
+│   ├── mvp-scope.md
 │   ├── project-charter.md
 │   └── SPRINTS.md
 │
