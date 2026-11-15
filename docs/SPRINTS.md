@@ -96,7 +96,7 @@ Each sprint is tracked as a GitHub [milestone](https://github.com/phuongcodes202
 - ✅ [Relationship Matrix](erd.md#3-relationship-matrix)
 - ✅ [Analytics Model](analytics-model.md)
 - ✅ [Validation Notes](erd.md#4-data-model-validation)
-- ⬜ Team review sign-off
+- ✅ Team review sign-off
 
 ---
 
@@ -235,7 +235,7 @@ Each sprint is tracked as a GitHub [milestone](https://github.com/phuongcodes202
 |--------|-------|--------|
 | Sprint 0 | Discovery & Planning | ✅ |
 | Sprint 1 | Solution Design | ✅ |
-| Sprint 2 | Data Architecture | 🟡 In review |
+| Sprint 2 | Data Architecture | ✅ |
 | Sprint 3 | Development Environment | ⬜ |
 | Sprint 4 | API Foundation | ⬜ |
 | Sprint 5 | Study Planner Engine | ⬜ |
@@ -248,4 +248,4 @@ Each sprint is tracked as a GitHub [milestone](https://github.com/phuongcodes202
 
 ## Next Step
 
-Sprints 0 and 1 are complete. Sprint 2 is documented and waiting for team sign-off. Then start **Sprint 3 - Development Environment** (GitHub setup, Next.js, FastAPI, environment variables).
+Sprints 0, 1 and 2 are complete. Start **Sprint 3 - Development Environment** (GitHub setup, Next.js, FastAPI, environment variables).
