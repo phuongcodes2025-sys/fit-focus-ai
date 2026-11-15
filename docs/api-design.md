@@ -5,28 +5,28 @@
 | **Updated in** | Sprint 1 - Solution Design · Sprint 2 - Data Architecture |
 | **Related** | [Architecture](architecture.md) · [Sequence Diagrams](sequence-diagrams.md) · [Data Dictionary](data-dictionary.md) |
 
-Base URL (local): `http://127.0.0.1:8000` · Interactive docs: `/docs` (FastAPI)
+Base URL (local): `http://127.0.0.1:8000/api/v1` · Interactive docs: `/docs` (FastAPI)
 
 All requests and responses are JSON. Dates use `YYYY-MM-DD`; timestamps use ISO 8601 UTC. All IDs are UUID strings.
 
-**Student identity (no login):** the browser creates a UUID once, keeps it in `localStorage` and sends it on every `/api/*` request as the header `X-Student-Id`. The backend creates the student row the first time it sees the ID, and only returns that student's data. Missing or invalid header → `400`.
+**Student identity (no login):** the browser creates a UUID once, keeps it in `localStorage` and sends it on every `/api/v1/*` request as the header `X-Student-Id`. The backend creates the student row the first time it sees the ID, and only returns that student's data. Missing or invalid header → `400`.
 
 ## Endpoints
 
 | Method | Path | Purpose | MVP |
 |--------|------|---------|-----|
-| GET | `/health` | Health check | Must |
-| POST | `/api/study-plan` | Generate a study plan | Must |
-| GET | `/api/history` | List previous plans | Should |
-| GET | `/api/history/{id}` | Get one plan | Should |
-| PATCH | `/api/assignments/{id}` | Update an assignment's status | Should |
-| GET | `/api/dashboard` | KPIs and trends | Should |
-| POST | `/api/discord` | Send a plan summary to Discord | Should |
-| POST | `/api/meal-plan` | Generate a meal plan | Could (stretch) |
+| GET | `/api/v1/health` | Health check | Must |
+| POST | `/api/v1/study-plan` | Generate a study plan | Must |
+| GET | `/api/v1/history` | List previous plans | Should |
+| GET | `/api/v1/history/{id}` | Get one plan | Should |
+| PATCH | `/api/v1/assignments/{id}` | Update an assignment's status | Should |
+| GET | `/api/v1/dashboard` | KPIs and trends | Should |
+| POST | `/api/v1/discord` | Send a plan summary to Discord | Should |
+| POST | `/api/v1/meal-plan` | Generate a meal plan | Could (stretch) |
 
 ---
 
-## GET /health
+## GET /api/v1/health
 
 Response `200 OK`:
 
@@ -38,7 +38,7 @@ Response `200 OK`:
 
 ---
 
-## POST /api/study-plan
+## POST /api/v1/study-plan
 
 Request:
 
@@ -143,7 +143,7 @@ Risk formula: see [architecture.md § 4](architecture.md#4-key-design-answers).
 
 ---
 
-## GET /api/history
+## GET /api/v1/history
 
 Query params: `limit` (default 20, max 100). Returns only the current student's plans.
 
@@ -163,13 +163,13 @@ Response `200 OK` (newest first):
 ]
 ```
 
-## GET /api/history/{id}
+## GET /api/v1/history/{id}
 
-Response `200 OK`: same body as the `POST /api/study-plan` response, with each task's current `status` and `is_overdue`. `404` if not found or it belongs to another student.
+Response `200 OK`: same body as the `POST /api/v1/study-plan` response, with each task's current `status` and `is_overdue`. `404` if not found or it belongs to another student.
 
 ---
 
-## PATCH /api/assignments/{id}
+## PATCH /api/v1/assignments/{id}
 
 Request:
 
@@ -187,7 +187,7 @@ Response `200 OK`:
 
 ---
 
-## GET /api/dashboard
+## GET /api/v1/dashboard
 
 Response `200 OK`:
 
@@ -211,7 +211,7 @@ All values are for the current student. Definitions and formulas: [analytics-mod
 
 ---
 
-## POST /api/discord
+## POST /api/v1/discord
 
 Request:
 
@@ -229,7 +229,7 @@ Errors: `404` plan not found · `502` Discord error or webhook not configured (`
 
 ---
 
-## POST /api/meal-plan (stretch)
+## POST /api/v1/meal-plan (stretch)
 
 Not part of the Sprint 2 data model. If built, meal plans get their own table.
 
