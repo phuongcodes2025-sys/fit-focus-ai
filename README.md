@@ -192,6 +192,7 @@ fit-focus-ai/
 ├── docs/
 │   ├── architecture.md
 │   ├── api-design.md
+│   ├── project-charter.md
 │   └── SPRINTS.md
 │
 ├── database/

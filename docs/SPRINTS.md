@@ -32,6 +32,8 @@ Each sprint is tracked as a GitHub [milestone](https://github.com/phuongcodes202
 
 #### 0.1 Project Charter
 
+📄 [project-charter.md](project-charter.md)
+
 - Problem Statement
 - Solution Overview
 - Project Goals
@@ -52,7 +54,7 @@ Each sprint is tracked as a GitHub [milestone](https://github.com/phuongcodes202
 
 **Deliverables**
 
-- ✅ Project Charter
+- ✅ [Project Charter](project-charter.md)
 - ✅ Business Analysis Report
 - ✅ MVP Scope Document
 
