@@ -66,7 +66,7 @@ flowchart TB
     end
 
     subgraph BE["Backend — FastAPI on Render"]
-        routes["Routes<br/>/api/study-plan · /api/history<br/>/api/dashboard · /api/discord · /health"]
+        routes["API<br/>/api/v1/study-plan · /api/v1/history<br/>/api/v1/dashboard · /api/v1/discord · /api/v1/health"]
         models["Models<br/>Pydantic request / response schemas"]
         engine["Study Planning Engine<br/>risk · priority · pomodoros · fallback"]
         ai["Gemini Service<br/>prompt · call · JSON validation"]
@@ -87,8 +87,8 @@ flowchart TB
 
 | Component | Folder (planned) | Responsibility |
 |-----------|------------------|----------------|
-| Routes | `backend/routes/` | HTTP endpoints, status codes |
-| Models | `backend/models/` | Request and response schemas, input validation |
+| API | `backend/api/` | HTTP endpoints under `/api/v1`, status codes |
+| Schemas | `backend/schemas/` | Request and response schemas, input validation |
 | Study Planning Engine | `backend/services/planner.py` | Deterministic risk, priority, Pomodoro and fallback schedule |
 | Gemini Service | `backend/services/gemini.py` | Build prompt, call Gemini, validate JSON |
 | Repository | `backend/services/repository.py` | Save and query plans and tasks |
@@ -255,7 +255,7 @@ Each decision: **context → decision → consequence**.
 
 ### ADR-004 — Synchronous REST API
 - **Context:** plan generation must finish in ≤ 10 seconds.
-- **Decision:** `POST /api/study-plan` waits for the result; Gemini timeout is 8 seconds. No queues or background jobs.
+- **Decision:** `POST /api/v1/study-plan` waits for the result; Gemini timeout is 8 seconds. No queues or background jobs.
 - **Consequence:** simple frontend logic; a loading state is needed.
 
 ### ADR-005 — PostgreSQL tables plus JSONB
