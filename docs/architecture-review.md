@@ -79,7 +79,7 @@ Student → Assignment Input → Risk Analysis → AI Planning → Saved Plan �
 | API Design updated | ✅ [api-design.md](api-design.md) |
 | Architecture Review Notes | ✅ this document |
 
-**Team review:** ⬜ All team members have read the documents and agree with the decisions above.
+**Team review:** ✅ All team members have read the documents and agree with the decisions above.
 
 ---
 

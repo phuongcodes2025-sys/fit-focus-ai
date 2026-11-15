@@ -79,7 +79,7 @@ Each sprint is tracked as a GitHub [milestone](https://github.com/phuongcodes202
 - ✅ [DFD](data-flow.md)
 - ✅ [Sequence Diagram](sequence-diagrams.md)
 - ✅ [Wireframes](wireframes.md)
-- ⬜ Team review sign-off ([architecture-review.md](architecture-review.md))
+- ✅ Team review sign-off ([architecture-review.md](architecture-review.md))
 
 ### Sprint 2 - Data Architecture
 
@@ -230,7 +230,7 @@ Each sprint is tracked as a GitHub [milestone](https://github.com/phuongcodes202
 | Sprint | Title | Status |
 |--------|-------|--------|
 | Sprint 0 | Discovery & Planning | ✅ |
-| Sprint 1 | Solution Design | 🟡 In review |
+| Sprint 1 | Solution Design | ✅ |
 | Sprint 2 | Data Architecture | ⬜ |
 | Sprint 3 | Development Environment | ⬜ |
 | Sprint 4 | API Foundation | ⬜ |
@@ -244,7 +244,7 @@ Each sprint is tracked as a GitHub [milestone](https://github.com/phuongcodes202
 
 ## Next Step
 
-Sprints 0 and 1 are documented. After the team signs off the [Architecture Review](architecture-review.md), start **Sprint 2 - Data Architecture**:
+Sprints 0 and 1 are documented. The [Architecture Review](architecture-review.md) is signed off. Start **Sprint 2 - Data Architecture**:
 
 1. Finalize the ERD from the [ERD preview](data-flow.md#5-erd-preview-for-sprint-2)
 2. Update `database/schema.sql`
