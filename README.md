@@ -193,8 +193,11 @@ fit-focus-ai/
 │   ├── architecture.md
 │   ├── api-design.md
 │   ├── architecture-review.md
+│   ├── analytics-model.md
 │   ├── business-analysis.md
+│   ├── data-dictionary.md
 │   ├── data-flow.md
+│   ├── erd.md
 │   ├── mvp-scope.md
 │   ├── project-charter.md
 │   ├── sequence-diagrams.md

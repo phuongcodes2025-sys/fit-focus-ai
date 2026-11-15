@@ -2,12 +2,14 @@
 
 | | |
 |---|---|
-| **Updated in** | Sprint 1 - Solution Design |
-| **Related** | [Architecture](architecture.md) · [Sequence Diagrams](sequence-diagrams.md) |
+| **Updated in** | Sprint 1 - Solution Design · Sprint 2 - Data Architecture |
+| **Related** | [Architecture](architecture.md) · [Sequence Diagrams](sequence-diagrams.md) · [Data Dictionary](data-dictionary.md) |
 
 Base URL (local): `http://127.0.0.1:8000` · Interactive docs: `/docs` (FastAPI)
 
-All requests and responses are JSON. Dates use `YYYY-MM-DD`; timestamps use ISO 8601 UTC.
+All requests and responses are JSON. Dates use `YYYY-MM-DD`; timestamps use ISO 8601 UTC. All IDs are UUID strings.
+
+**Student identity (no login):** the browser creates a UUID once, keeps it in `localStorage` and sends it on every `/api/*` request as the header `X-Student-Id`. The backend creates the student row the first time it sees the ID, and only returns that student's data. Missing or invalid header → `400`.
 
 ## Endpoints
 
@@ -17,7 +19,7 @@ All requests and responses are JSON. Dates use `YYYY-MM-DD`; timestamps use ISO 
 | POST | `/api/study-plan` | Generate a study plan | Must |
 | GET | `/api/history` | List previous plans | Should |
 | GET | `/api/history/{id}` | Get one plan | Should |
-| PATCH | `/api/tasks/{id}` | Mark a task completed | Should |
+| PATCH | `/api/assignments/{id}` | Update an assignment's status | Should |
 | GET | `/api/dashboard` | KPIs and trends | Should |
 | POST | `/api/discord` | Send a plan summary to Discord | Should |
 | POST | `/api/meal-plan` | Generate a meal plan | Could (stretch) |
@@ -44,6 +46,7 @@ Request:
 {
   "assignments": [
     {
+      "id": null,
       "course": "COSC 1436",
       "title": "Programming Lab",
       "type": "assignment",
@@ -66,6 +69,7 @@ Request:
 | Field | Type | Rules |
 |-------|------|-------|
 | `assignments` | array | 1 – 20 items |
+| `id` | UUID or null | Optional. Send an existing assignment's ID when regenerating a plan; omit or `null` for a new assignment |
 | `course` | string | Required, 1 – 50 characters |
 | `title` | string | Required, 1 – 100 characters |
 | `type` | string | `assignment` (default) or `exam` |
@@ -77,7 +81,8 @@ Response `201 Created`:
 
 ```json
 {
-  "id": 1,
+  "id": "c71d2e4a-5b3f-4e0a-9d1c-2f6b8a7e1040",
+  "plan_date": "2026-11-16",
   "created_at": "2026-11-16T14:05:00Z",
   "source": "gemini",
   "saved": true,
@@ -90,7 +95,7 @@ Response `201 Created`:
   },
   "tasks": [
     {
-      "id": 1,
+      "id": "a3f04b9e-1c2d-4e5f-8a7b-6c5d4e3f2a12",
       "rank": 1,
       "course": "COSC 1436",
       "title": "Programming Lab",
@@ -102,15 +107,16 @@ Response `201 Created`:
       "risk_level": "high",
       "priority": "high",
       "pomodoros": 15,
-      "completed": false
+      "status": "pending",
+      "is_overdue": false
     }
   ],
   "daily_schedule": [
     {
       "date": "2026-11-16",
       "blocks": [
-        { "task": "Programming Lab", "pomodoros": 6 },
-        { "task": "Networking Quiz", "pomodoros": 2 }
+        { "assignment_id": "a3f04b9e-1c2d-4e5f-8a7b-6c5d4e3f2a12", "task": "Programming Lab", "pomodoros": 6 },
+        { "assignment_id": "…", "task": "Networking Quiz", "pomodoros": 2 }
       ],
       "total_pomodoros": 8
     }
@@ -124,10 +130,13 @@ Response `201 Created`:
 | Field | Notes |
 |-------|-------|
 | `source` | `gemini` or `fallback` (Gemini failed; rule-based schedule) |
-| `saved` | `false` if the database save failed; `id` and task `id`s are then `null` |
+| `id` | Plan ID. Task `id` is the assignment ID (reuse it when regenerating) |
+| `plan_date` | The "today" used for risk scoring |
+| `saved` | `false` if the database save failed; plan `id` is then `null` |
 | `risk_level`, `priority` | `low` (0–39), `medium` (40–69), `high` (70–100) |
 | `rank` | Order by risk score desc, then due date asc |
 | `pomodoros` | `ceil(estimated_hours × 60 / 25)` |
+| `status`, `is_overdue` | Assignment status (`pending`, `in_progress`, `completed`); overdue is calculated |
 | `warnings` | e.g. `"Not enough days to fit all Pomodoros before 2026-11-18"` |
 
 Risk formula: see [architecture.md § 4](architecture.md#4-key-design-answers).
@@ -136,15 +145,15 @@ Risk formula: see [architecture.md § 4](architecture.md#4-key-design-answers).
 
 ## GET /api/history
 
-Query params: `limit` (default 20, max 100), `type` (optional: `study` | `meal`).
+Query params: `limit` (default 20, max 100). Returns only the current student's plans.
 
 Response `200 OK` (newest first):
 
 ```json
 [
   {
-    "id": 1,
-    "plan_type": "study",
+    "id": "c71d2e4a-5b3f-4e0a-9d1c-2f6b8a7e1040",
+    "plan_date": "2026-11-16",
     "created_at": "2026-11-16T14:05:00Z",
     "source": "gemini",
     "overall_risk_score": 78,
@@ -156,25 +165,25 @@ Response `200 OK` (newest first):
 
 ## GET /api/history/{id}
 
-Response `200 OK`: same body as the `POST /api/study-plan` response, with current task `completed` values. `404` if not found.
+Response `200 OK`: same body as the `POST /api/study-plan` response, with each task's current `status` and `is_overdue`. `404` if not found or it belongs to another student.
 
 ---
 
-## PATCH /api/tasks/{id}
+## PATCH /api/assignments/{id}
 
 Request:
 
 ```json
-{ "completed": true }
+{ "status": "completed" }
 ```
 
 Response `200 OK`:
 
 ```json
-{ "id": 1, "completed": true }
+{ "id": "a3f04b9e-1c2d-4e5f-8a7b-6c5d4e3f2a12", "status": "completed", "completed_at": "2026-11-17T20:00:00Z" }
 ```
 
-`404` if the task does not exist.
+`status` is `pending`, `in_progress` or `completed`. `completed_at` is set when completed and cleared otherwise. `404` if not found or it belongs to another student.
 
 ---
 
@@ -187,12 +196,18 @@ Response `200 OK`:
   "total_plans": 4,
   "total_tasks": 12,
   "completed_tasks": 5,
+  "overdue_tasks": 1,
   "average_risk_score": 54,
+  "hours_planned": 10.0,
+  "pomodoros_planned": 24,
+  "ai_success_rate": 0.75,
   "risk_distribution": { "low": 4, "medium": 5, "high": 3 },
   "risk_trend": [{ "date": "2026-11-14", "average_risk_score": 45 }],
   "study_time_trend": [{ "date": "2026-11-16", "pomodoros": 8 }]
 }
 ```
+
+All values are for the current student. Definitions and formulas: [analytics-model.md](analytics-model.md).
 
 ---
 
@@ -201,7 +216,7 @@ Response `200 OK`:
 Request:
 
 ```json
-{ "plan_id": 1 }
+{ "plan_id": "c71d2e4a-5b3f-4e0a-9d1c-2f6b8a7e1040" }
 ```
 
 Response `200 OK`:
@@ -216,6 +231,8 @@ Errors: `404` plan not found · `502` Discord error or webhook not configured (`
 
 ## POST /api/meal-plan (stretch)
 
+Not part of the Sprint 2 data model. If built, meal plans get their own table.
+
 Request:
 
 ```json
@@ -226,7 +243,7 @@ Response:
 
 ```json
 {
-  "id": 2,
+  "id": "…",
   "days": [{ "day": "Monday", "breakfast": "...", "lunch": "...", "dinner": "..." }],
   "shopping_list": [{ "item": "Rice", "estimated_cost": 3.5 }],
   "tips": ["Cook in batches on Sunday"]
@@ -239,8 +256,8 @@ Response:
 
 | Status | When | Body |
 |--------|------|------|
-| 400 | Request is not valid JSON | `{ "detail": "..." }` |
-| 404 | Plan or task not found | `{ "detail": "Plan not found" }` |
+| 400 | Request is not valid JSON, or `X-Student-Id` missing / invalid | `{ "detail": "..." }` |
+| 404 | Plan or assignment not found | `{ "detail": "Plan not found" }` |
 | 422 | Validation failed | FastAPI format: `{ "detail": [ { "loc": ["body", "assignments", 0, "due_date"], "msg": "...", "type": "..." } ] }` |
 | 502 | Discord delivery failed | `{ "sent": false, "detail": "..." }` |
 | 500 | Unexpected server error | `{ "detail": "Internal server error" }` |

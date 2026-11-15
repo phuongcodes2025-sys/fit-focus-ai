@@ -154,7 +154,7 @@ Formulas for 2.1 – 2.5 are defined in [architecture.md § 4](architecture.md#4
 
 ## 5. ERD Preview (for Sprint 2)
 
-Draft only; Sprint 2 finalizes the schema, data dictionary and `schema.sql`.
+> **Superseded.** This was the Sprint 1 draft. The final model is in [erd.md](erd.md) (Sprint 2).
 
 ```mermaid
 erDiagram

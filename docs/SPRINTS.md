@@ -83,16 +83,20 @@ Each sprint is tracked as a GitHub [milestone](https://github.com/phuongcodes202
 
 ### Sprint 2 - Data Architecture
 
-- 2.1 ERD Design
-- 2.2 Database Schema
-- 2.3 Data Model Validation
-- 2.4 Analytics Model
+- 2.1 ERD Design: 📄 [erd.md](erd.md)
+- 2.2 Database Schema: 📄 [schema.sql](../database/schema.sql) · [data-dictionary.md](data-dictionary.md)
+- 2.3 Data Model Validation: 📄 [erd.md § 4](erd.md#4-data-model-validation)
+- 2.4 Analytics Model: 📄 [analytics-model.md](analytics-model.md)
 
 **Deliverables**
 
-- ⬜ ERD.png
-- ⬜ schema.sql
-- ⬜ Data Dictionary
+- ✅ [ERD](erd.md) (Mermaid diagram instead of ERD.png)
+- ✅ [schema.sql](../database/schema.sql) (tested on PostgreSQL 16)
+- ✅ [Data Dictionary](data-dictionary.md)
+- ✅ [Relationship Matrix](erd.md#3-relationship-matrix)
+- ✅ [Analytics Model](analytics-model.md)
+- ✅ [Validation Notes](erd.md#4-data-model-validation)
+- ⬜ Team review sign-off
 
 ---
 
@@ -231,7 +235,7 @@ Each sprint is tracked as a GitHub [milestone](https://github.com/phuongcodes202
 |--------|-------|--------|
 | Sprint 0 | Discovery & Planning | ✅ |
 | Sprint 1 | Solution Design | ✅ |
-| Sprint 2 | Data Architecture | ⬜ |
+| Sprint 2 | Data Architecture | 🟡 In review |
 | Sprint 3 | Development Environment | ⬜ |
 | Sprint 4 | API Foundation | ⬜ |
 | Sprint 5 | Study Planner Engine | ⬜ |
@@ -244,10 +248,4 @@ Each sprint is tracked as a GitHub [milestone](https://github.com/phuongcodes202
 
 ## Next Step
 
-Sprints 0 and 1 are documented. The [Architecture Review](architecture-review.md) is signed off. Start **Sprint 2 - Data Architecture**:
-
-1. Finalize the ERD from the [ERD preview](data-flow.md#5-erd-preview-for-sprint-2)
-2. Update `database/schema.sql`
-3. Write the data dictionary
-
-Then move on to coding in Sprints 3–4.
+Sprints 0 and 1 are complete. Sprint 2 is documented and waiting for team sign-off. Then start **Sprint 3 - Development Environment** (GitHub setup, Next.js, FastAPI, environment variables).

@@ -103,7 +103,7 @@ Top navigation on every screen: **Fit & Focus AI** (logo → Home) · **New Plan
 | Risk | `summary.overall_risk_score`, `summary.overall_risk_level`, `risk_analysis` |
 | Priority | `tasks[]` sorted by `rank` with `priority` and `risk_score` |
 | Study Plan | `daily_schedule[]` |
-| Pomodoros | `tasks[].pomodoros`, completed checkbox (`PATCH /api/tasks/{id}`) |
+| Pomodoros | `tasks[].pomodoros`, done checkbox → `status` (`PATCH /api/assignments/{id}`) |
 | Tips | `tips[]` |
 | Notices | `source = fallback`, `saved = false`, `warnings[]` |
 

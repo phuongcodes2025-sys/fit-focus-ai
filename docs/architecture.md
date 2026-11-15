@@ -174,12 +174,14 @@ risk_score = round(100 × (0.4·urgency + 0.3·workload + 0.2·difficulty + 0.1�
 
 | Stored (persistent) | Temporary (not stored) |
 |---------------------|------------------------|
-| Plan: input, result, overall risk score, source (`gemini` / `fallback`), timestamp | Form state in the browser |
-| Tasks: details, risk score, priority, Pomodoros, completed flag | Raw prompt text sent to Gemini |
-| Notification log: plan, status, timestamp | Gemini raw response after validation |
-| | API keys (environment variables only) |
+| Anonymous student ID | Form state in the browser |
+| Assignments: details, status | Raw prompt text sent to Gemini |
+| Plans: source, AI summary, tips, warnings | Gemini raw response after validation |
+| Risk analyses: score, level, rank, Pomodoros (history kept) | API keys (environment variables only) |
+| Schedule blocks: Pomodoros per day | |
+| Notification log: plan, message, status | |
 
-There is **no users table** in the MVP (no login). See the ERD preview in [data-flow.md](data-flow.md#5-erd-preview-for-sprint-2).
+Students are **anonymous** (no name or email). Final data model: [erd.md](erd.md) and [data-dictionary.md](data-dictionary.md) (Sprint 2).
 
 ---
 
@@ -260,11 +262,13 @@ Each decision: **context → decision → consequence**.
 - **Context:** the dashboard needs queries per task; the full plan must be redisplayed.
 - **Decision:** store tasks in their own table (for analytics) and the full plan result as JSONB.
 - **Consequence:** simple dashboard SQL; small data duplication is acceptable.
+- **Superseded in Sprint 2:** the model is fully relational with no JSONB copy of the whole plan (see [erd.md](erd.md), DM-8).
 
 ### ADR-006 — No authentication in the MVP
 - **Context:** login adds time and security work (see [mvp-scope.md](mvp-scope.md#2-out-of-scope)).
 - **Decision:** anonymous, single-tenant app; history and dashboard are shared.
 - **Consequence:** do not collect personal data; accounts are Phase 2.
+- **Updated in Sprint 2:** each browser gets an anonymous student ID, so history and the dashboard are per student instead of shared (see [erd.md](erd.md), DM-1).
 
 ### ADR-007 — Discord via a server-side webhook, triggered by the user
 - **Context:** notifications are a Should-have and must not block the main flow.
