@@ -64,19 +64,22 @@ Each sprint is tracked as a GitHub [milestone](https://github.com/phuongcodes202
 
 ### Sprint 1 - Solution Design
 
-- 1.1 System Architecture
-- 1.2 Use Case Diagram
-- 1.3 Data Flow Diagram
-- 1.4 Sequence Diagram
-- 1.5 UI Wireframes
+- 1.1 System Architecture: 📄 [architecture.md](architecture.md)
+- 1.2 Use Case Diagram: 📄 [use-cases.md](use-cases.md)
+- 1.3 Data Flow Diagram: 📄 [data-flow.md](data-flow.md) (includes ERD preview)
+- 1.4 Sequence Diagram: 📄 [sequence-diagrams.md](sequence-diagrams.md)
+- 1.5 UI Wireframes: 📄 [wireframes.md](wireframes.md)
+- Architecture Review: 📄 [architecture-review.md](architecture-review.md)
+- API Design update: 📄 [api-design.md](api-design.md)
 
 **Deliverables**
 
-- ⬜ architecture.md
-- ⬜ Use Case Diagram
-- ⬜ DFD
-- ⬜ Sequence Diagram
-- ⬜ Wireframes
+- ✅ [architecture.md](architecture.md)
+- ✅ [Use Case Diagram](use-cases.md)
+- ✅ [DFD](data-flow.md)
+- ✅ [Sequence Diagram](sequence-diagrams.md)
+- ✅ [Wireframes](wireframes.md)
+- ⬜ Team review sign-off ([architecture-review.md](architecture-review.md))
 
 ### Sprint 2 - Data Architecture
 
@@ -227,7 +230,7 @@ Each sprint is tracked as a GitHub [milestone](https://github.com/phuongcodes202
 | Sprint | Title | Status |
 |--------|-------|--------|
 | Sprint 0 | Discovery & Planning | ✅ |
-| Sprint 1 | Solution Design | ⬜ |
+| Sprint 1 | Solution Design | 🟡 In review |
 | Sprint 2 | Data Architecture | ⬜ |
 | Sprint 3 | Development Environment | ⬜ |
 | Sprint 4 | API Foundation | ⬜ |
@@ -241,12 +244,10 @@ Each sprint is tracked as a GitHub [milestone](https://github.com/phuongcodes202
 
 ## Next Step
 
-Sprint 0 is complete. Start **Sprint 1 - Solution Design** with:
+Sprints 0 and 1 are documented. After the team signs off the [Architecture Review](architecture-review.md), start **Sprint 2 - Data Architecture**:
 
-1. Architecture Diagram
-2. Use Case Diagram
-3. ERD Diagram
-4. API Design
+1. Finalize the ERD from the [ERD preview](data-flow.md#5-erd-preview-for-sprint-2)
+2. Update `database/schema.sql`
+3. Write the data dictionary
 
 Then move on to coding in Sprints 3–4.
-

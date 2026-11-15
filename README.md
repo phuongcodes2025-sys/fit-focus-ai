@@ -127,7 +127,7 @@ Gemini API   Tiger Data
 Discord Webhook
 ```
 
-See [docs/architecture.md](docs/architecture.md) and [docs/api-design.md](docs/api-design.md).
+See [docs/architecture.md](docs/architecture.md) and [docs/api-design.md](docs/api-design.md). Design diagrams: [use cases](docs/use-cases.md), [data flow](docs/data-flow.md), [sequence diagrams](docs/sequence-diagrams.md), [wireframes](docs/wireframes.md).
 
 ---
 
@@ -192,9 +192,14 @@ fit-focus-ai/
 ├── docs/
 │   ├── architecture.md
 │   ├── api-design.md
+│   ├── architecture-review.md
 │   ├── business-analysis.md
+│   ├── data-flow.md
 │   ├── mvp-scope.md
 │   ├── project-charter.md
+│   ├── sequence-diagrams.md
+│   ├── use-cases.md
+│   ├── wireframes.md
 │   └── SPRINTS.md
 │
 ├── database/
@@ -291,6 +296,8 @@ DISCORD_WEBHOOK_URL=your_discord_webhook
 ---
 
 ## API Endpoints
+
+Main endpoints are below. The full list (health check, plan details, task completion, dashboard) with request and response examples is in [docs/api-design.md](docs/api-design.md).
 
 ### Generate Study Plan
 
