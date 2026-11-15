@@ -184,9 +184,12 @@ fit-focus-ai/
 │   └── public/
 │
 ├── backend/
-│   ├── routes/
+│   ├── api/
 │   ├── services/
 │   ├── models/
+│   ├── schemas/
+│   ├── database/
+│   ├── utils/
 │   └── main.py
 │
 ├── docs/
@@ -305,25 +308,25 @@ Main endpoints are below. The full list (health check, plan details, task comple
 ### Generate Study Plan
 
 ```http
-POST /api/study-plan
+POST /api/v1/study-plan
 ```
 
 ### Generate Meal Plan
 
 ```http
-POST /api/meal-plan
+POST /api/v1/meal-plan
 ```
 
 ### Get History
 
 ```http
-GET /api/history
+GET /api/v1/history
 ```
 
 ### Send To Discord
 
 ```http
-POST /api/discord
+POST /api/v1/discord
 ```
 
 ---
