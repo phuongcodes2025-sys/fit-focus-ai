@@ -36,6 +36,7 @@ The frontend is not initialized yet (see `frontend/README.md`). Once it exists:
 
 ```bash
 cd frontend
+cp .env.example .env.local
 npm install
 npm run dev
 ```
@@ -49,6 +50,17 @@ Verify: open <http://localhost:3000>.
 | `GEMINI_API_KEY` | backend | Gemini API access |
 | `DATABASE_URL` | backend | Tiger Data connection string |
 | `DISCORD_WEBHOOK_URL` | backend | Discord notifications |
+| `ENVIRONMENT` | backend | `local` or `production` |
+| `NEXT_PUBLIC_API_URL` | frontend | Base URL of the backend |
+
+Where each environment keeps its values:
+
+| Environment | Backend | Frontend |
+|-------------|---------|----------|
+| Local | `backend/.env` | `frontend/.env.local` |
+| Production | Render dashboard | Vercel project settings (or `.env.production`) |
+
+Copy the `.env.example` file in each folder to get started. Never commit real values.
 
 Never commit `.env`; it is listed in `.gitignore`.
 
